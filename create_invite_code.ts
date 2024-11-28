@@ -7,7 +7,10 @@ import { colors } from "@cliffy/ansi/colors";
 export const createInviteCodeCmd = new Command()
   .name("create-invite-code")
   .description("Request an invite code from your PDS.")
-  .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", { required: true })
+  .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", {
+    default: Deno.env.get("PDS_ADMIN_PASSWORD") ?? undefined,
+    required: true,
+  })
   .option("-u, --uses <uses:number>", "The number of uses the invite code is valid for", { default: 1 })
   .action((async ({ server, adminPassword, uses }: GlobalOpts & { uses: number; }) => {
     console.log(`🛜 Requesting invite code from PDS ${server}...`);

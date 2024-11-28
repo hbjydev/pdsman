@@ -9,7 +9,10 @@ import { XRPC, XRPCResponse } from "@atcute/client";
 export const listCmd = new Command()
   .name("list")
   .description("List accounts associated with the given PDS.")
-  .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", { required: true })
+  .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", {
+    default: Deno.env.get("PDS_ADMIN_PASSWORD") ?? undefined,
+    required: true,
+  })
   .action((async ({ server, adminPassword }: GlobalOpts) => {
     console.log(`🛜 Requesting repo list from ${server}...`);
     const manager = new CredentialManager({ service: `${server}` });

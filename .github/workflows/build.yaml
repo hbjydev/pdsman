@@ -11,7 +11,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - run: deno compile -o pdsman-linux-x86 -N main.ts
+      - run: deno compile -o pdsman-linux-x86 -N -E main.ts
       - uses: actions/upload-artifact@v4
         with:
           name: pdsman
