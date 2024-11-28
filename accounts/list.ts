@@ -49,5 +49,6 @@ export const listCmd = new Command()
       console.log(`✅ Repo list request to ${server} successful!`);
     } catch(e) {
       console.error(`❌ Failed to send repo list request to ${server}:\n\n`, e);
+      Deno.exit(1);
     }
   }) as ActionHandler);

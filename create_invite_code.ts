@@ -28,5 +28,6 @@ export const createInviteCodeCmd = new Command()
       console.log(`✅ Invite code: ${colors.bold.blue(res.data.code)}`);
     } catch(e) {
       console.error(`❌ Failed to request invite code from ${server}:\n\n`, e);
+      Deno.exit(1);
     }
   }) as ActionHandler);

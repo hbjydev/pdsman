@@ -18,6 +18,7 @@ export const requestCrawlCmd = new Command()
         console.log(`✅ Relay crawl request to ${host} successful!`);
       } catch(e) {
         console.error(`❌ Failed to send relay crawl request to ${host}:\n\n`, e);
+        Deno.exit(1);
       }
     }
   }) as ActionHandler);
