@@ -6,7 +6,7 @@ import { createInviteCodeCmd } from "./create_invite_code.ts";
 const cmd = new Command()
   .name("pdsman")
   .description("A simple ATProto PDS administration tool.")
-  .version("v0.1.0")
+  .version("v0.2.0")
   .globalOption("-s, --server <server:string>", "The PDS to connect to.", { default: 'http://localhost:2583' })
   .globalOption("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", {
     default: Deno.env.get("PDS_ADMIN_PASSWORD") ?? undefined,
