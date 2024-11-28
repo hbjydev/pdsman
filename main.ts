@@ -1,6 +1,7 @@
 import { ActionHandler, Command } from '@cliffy/command';
 import { accountCmd } from "./accounts/mod.ts";
 import { requestCrawlCmd } from "./relay_crawl.ts";
+import { createInviteCodeCmd } from "./create_invite_code.ts";
 
 const cmd = new Command()
   .name("pdsman")
@@ -10,6 +11,7 @@ const cmd = new Command()
   .globalOption("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.")
   .action((() => { cmd.showHelp(); }) as ActionHandler)
   .command('accounts', accountCmd)
-  .command('request-crawl', requestCrawlCmd);
+  .command('request-crawl', requestCrawlCmd)
+  .command('create-invite-code', createInviteCodeCmd);
 
 if (import.meta.main) await cmd.parse(Deno.args);

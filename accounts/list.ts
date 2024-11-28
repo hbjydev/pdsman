@@ -31,9 +31,7 @@ export const listCmd = new Command()
           type: 'get',
           nsid: 'com.atproto.admin.getAccountInfo',
           params: { did: repo.did },
-          headers: {
-            'Authorization': `Basic ${authStr}`,
-          },
+          headers: { 'Authorization': `Basic ${authStr}` },
         }) as XRPCResponse<{ did: string; handle: string; email: string; }>;
 
         records.push([ accountInfo.data.did, accountInfo.data.handle, accountInfo.data.email ]);
