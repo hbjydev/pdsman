@@ -1,4 +1,4 @@
-import { Command } from "@cliffy/command";
+import { ActionHandler, Command } from "@cliffy/command";
 import { CredentialManager } from "@atcute/client";
 import { XRPC } from "@atcute/client";
 import { GlobalOpts } from "./types.ts";
@@ -7,7 +7,7 @@ export const requestCrawlCmd = new Command()
   .name("request-crawl")
   .description("Request a relay crawls your PDS.")
   .arguments("<...relays:string>")
-  .action(async ({ server }: GlobalOpts, ...args: Array<string>) => {
+  .action((async ({ server }: GlobalOpts, ...args: Array<string>) => {
     for (const host of args) {
       console.log(`🛜 Requesting crawl from relay ${host}...`);
       const manager = new CredentialManager({ service: `https://${host}` });
@@ -20,4 +20,4 @@ export const requestCrawlCmd = new Command()
         console.error(`❌ Failed to send relay crawl request to ${host}:\n\n`, e);
       }
     }
-  });
+  }) as ActionHandler);

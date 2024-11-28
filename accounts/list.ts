@@ -1,4 +1,4 @@
-import { Command } from "@cliffy/command";
+import { ActionHandler, Command } from "@cliffy/command";
 import { GlobalOpts } from "../types.ts";
 import { colors } from "@cliffy/ansi/colors";
 import { Table } from "@cliffy/table";
@@ -10,7 +10,7 @@ export const listCmd = new Command()
   .name("list")
   .description("List accounts associated with the given PDS.")
   .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", { required: true })
-  .action(async ({ server, adminPassword }: GlobalOpts) => {
+  .action((async ({ server, adminPassword }: GlobalOpts) => {
     console.log(`🛜 Requesting repo list from ${server}...`);
     const manager = new CredentialManager({ service: `${server}` });
     const rpc = new XRPC({ handler: manager });
@@ -49,4 +49,4 @@ export const listCmd = new Command()
     } catch(e) {
       console.error(`❌ Failed to send repo list request to ${server}:\n\n`, e);
     }
-  });
+  }) as ActionHandler);

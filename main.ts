@@ -1,4 +1,4 @@
-import { Command } from '@cliffy/command';
+import { ActionHandler, Command } from '@cliffy/command';
 import { accountCmd } from "./accounts/mod.ts";
 import { requestCrawlCmd } from "./relay_crawl.ts";
 
@@ -8,7 +8,7 @@ const cmd = new Command()
   .version("v0.1.0")
   .globalOption("-s, --server <server:string>", "The PDS to connect to.", { default: 'http://localhost:2583' })
   .globalOption("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.")
-  .action(() => cmd.showHelp())
+  .action((() => { cmd.showHelp(); }) as ActionHandler)
   .command('accounts', accountCmd)
   .command('request-crawl', requestCrawlCmd);
 
