@@ -1,7 +1,7 @@
-import { ActionHandler, Command } from "@cliffy/command";
+import { type ActionHandler, Command } from "@cliffy/command";
 import { CredentialManager } from "@atcute/client";
 import { XRPC } from "@atcute/client";
-import { GlobalOpts } from "./types.ts";
+import type { GlobalOpts } from "./types.ts";
 
 export const requestCrawlCmd = new Command()
   .name("request-crawl")
@@ -18,7 +18,7 @@ export const requestCrawlCmd = new Command()
         console.log(`✅ Relay crawl request to ${host} successful!`);
       } catch(e) {
         console.error(`❌ Failed to send relay crawl request to ${host}:\n\n`, e);
-        Deno.exit(1);
+        process.exit(1);
       }
     }
   }) as ActionHandler);

@@ -1,18 +1,13 @@
-import { ActionHandler, Command } from "@cliffy/command";
-import { GlobalOpts } from "../types.ts";
+import { type ActionHandler, Command } from "@cliffy/command";
+import type { GlobalOpts } from "../types.ts";
 import { colors } from "@cliffy/ansi/colors";
 import { Table } from "@cliffy/table";
-import { encodeBase64 } from "@std/encoding/base64";
 import { CredentialManager } from "@atcute/client";
-import { XRPC, XRPCResponse } from "@atcute/client";
+import { XRPC, type XRPCResponse } from "@atcute/client";
 
 export const listCmd = new Command()
   .name("list")
   .description("List accounts associated with the given PDS.")
-  .option("-p, --admin-password <adminPassword:string>", "The admin password for the PDS.", {
-    default: Deno.env.get("PDS_ADMIN_PASSWORD") ?? undefined,
-    required: true,
-  })
   .action((async ({ server, adminPassword }: GlobalOpts) => {
     console.log(`🛜 Requesting repo list from ${server}...`);
     const manager = new CredentialManager({ service: `${server}` });
@@ -25,7 +20,7 @@ export const listCmd = new Command()
         params: { limit: 100 },
       }) as XRPCResponse<{ cursor: string; repos: { did: string; head: string; rev: string; active: boolean; }[]; }>;
 
-      const authStr = encodeBase64(`admin:${adminPassword}`);
+      const authStr = btoa(`admin:${adminPassword}`);
 
       const records: string[][] = [];
 
@@ -49,6 +44,6 @@ export const listCmd = new Command()
       console.log(`✅ Repo list request to ${server} successful!`);
     } catch(e) {
       console.error(`❌ Failed to send repo list request to ${server}:\n\n`, e);
-      Deno.exit(1);
+      process.exit(1);
     }
   }) as ActionHandler);
