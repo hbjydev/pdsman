@@ -1,1 +1,1 @@
-# pdsman
+# pdsctl

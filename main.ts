@@ -1,10 +1,10 @@
 import { type ActionHandler, Command } from '@cliffy/command';
-import { accountCmd } from "./accounts/mod";
+import { accountCmd } from "./accounts";
 import { requestCrawlCmd } from "./relay_crawl";
 import { createInviteCodeCmd } from "./create_invite_code";
 
 const cmd = new Command()
-  .name("pdsman")
+  .name("pdsctl")
   .description("A simple ATProto PDS administration tool.")
   .version("v0.2.0")
   .globalOption("-s, --server <server:string>", "The PDS to connect to.", { default: 'http://localhost:2583' })

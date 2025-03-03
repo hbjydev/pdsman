@@ -1,9 +1,9 @@
 import { type ActionHandler, Command } from "@cliffy/command";
-import type { GlobalOpts } from "../types.ts";
 import { colors } from "@cliffy/ansi/colors";
 import { Table } from "@cliffy/table";
 import { CredentialManager } from "@atcute/client";
 import { XRPC, type XRPCResponse } from "@atcute/client";
+import type { GlobalOpts } from "../types";
 
 export const listCmd = new Command()
   .name("list")
